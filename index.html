@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TypeXpert – Typing Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1a1a2e;
+    --accent: #e8681a;
+    --accent-light: #f5834a;
+    --accent-soft: #fff3eb;
+    --white: #ffffff;
+    --off-white: #f8f9fb;
+    --light-gray: #f1f3f6;
+    --mid-gray: #e2e6ed;
+    --text-main: #1a1a2e;
+    --text-sub: #5a6279;
+    --text-light: #8a91a8;
+    --shadow-sm: 0 2px 12px rgba(26,26,46,0.07);
+    --shadow-md: 0 8px 32px rgba(26,26,46,0.12);
+    --shadow-lg: 0 20px 60px rgba(26,26,46,0.15);
+    --radius: 14px;
+    --radius-sm: 8px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', 'Cairo', sans-serif;
+    background: var(--white);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  html[lang="ar"] body {
+    font-family: 'Cairo', 'Inter', sans-serif;
+    direction: rtl;
+  }
+
+  /* ──── NAV ──── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--mid-gray);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 72px;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+  }
+
+  .nav-logo img {
+    height: 44px;
+  }
+
+  .nav-logo-text {
+    font-size: 1.5rem; font-weight: 800; color: var(--primary); letter-spacing: -0.5px;
+    display: flex; align-items: center; gap: 2px;
+  }
+
+  .nav-logo-text span { color: var(--accent); }
+
+  .nav-links {
+    display: flex; align-items: center; gap: 32px; list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none; color: var(--text-sub); font-size: 0.9rem; font-weight: 500;
+    transition: color 0.2s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 2px;
+    background: var(--accent); border-radius: 2px;
+    transform: scaleX(0); transition: transform 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  .nav-right { display: flex; align-items: center; gap: 12px; }
+
+  .lang-btn {
+    background: var(--accent); color: white; border: none;
+    padding: 8px 18px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;
+    cursor: pointer; transition: all 0.2s; letter-spacing: 0.3px;
+    font-family: inherit;
+  }
+  .lang-btn:hover { background: var(--accent-light); transform: translateY(-1px); }
+
+  .nav-cta {
+    background: var(--primary); color: white; border: none;
+    padding: 10px 22px; border-radius: 22px; font-size: 0.88rem; font-weight: 600;
+    cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-block;
+    font-family: inherit;
+  }
+  .nav-cta:hover { background: var(--accent); transform: translateY(-1px); }
+
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px; cursor: pointer;
+    background: none; border: none; padding: 4px;
+  }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--primary); border-radius: 2px; transition: all 0.3s; }
+
+  /* ──── HERO ──── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f8f9fb 0%, #fff3eb 40%, #f0f4ff 100%);
+    display: flex; align-items: center;
+    padding: 120px 5% 80px;
+    position: relative; overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; top: -200px; right: -100px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(232,104,26,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -150px; left: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(26,26,46,0.05) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero-inner {
+    max-width: 1200px; margin: 0 auto; width: 100%;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    position: relative; z-index: 1;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent-soft); border: 1px solid rgba(232,104,26,0.2);
+    color: var(--accent); padding: 6px 16px; border-radius: 20px;
+    font-size: 0.82rem; font-weight: 600; margin-bottom: 20px;
+    letter-spacing: 0.5px; text-transform: uppercase;
+  }
+
+  .hero-badge span { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+    font-weight: 800; line-height: 1.15; color: var(--primary);
+    margin-bottom: 20px; letter-spacing: -1px;
+  }
+
+  .hero h1 em { color: var(--accent); font-style: normal; }
+
+  .hero p {
+    font-size: 1.1rem; color: var(--text-sub); margin-bottom: 36px;
+    line-height: 1.75; max-width: 500px;
+  }
+
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--accent); color: white; padding: 14px 28px;
+    border-radius: 28px; font-size: 0.95rem; font-weight: 600;
+    text-decoration: none; transition: all 0.2s;
+    box-shadow: 0 4px 20px rgba(232,104,26,0.35);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--accent-light); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(232,104,26,0.4); }
+
+  .btn-secondary {
+    background: white; color: var(--primary); padding: 14px 28px;
+    border-radius: 28px; font-size: 0.95rem; font-weight: 600;
+    text-decoration: none; transition: all 0.2s; border: 2px solid var(--mid-gray);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex; gap: 32px; margin-top: 48px; padding-top: 40px;
+    border-top: 1px solid var(--mid-gray);
+  }
+
+  .stat { display: flex; flex-direction: column; gap: 2px; }
+  .stat-num { font-size: 2rem; font-weight: 800; color: var(--primary); line-height: 1; }
+  .stat-num span { color: var(--accent); }
+  .stat-label { font-size: 0.82rem; color: var(--text-light); font-weight: 500; }
+
+  /* Hero visual */
+  .hero-visual {
+    display: flex; flex-direction: column; gap: 16px;
+    position: relative;
+  }
+
+  .hero-card-main {
+    background: white; border-radius: 20px; padding: 28px;
+    box-shadow: var(--shadow-lg); border: 1px solid var(--mid-gray);
+    position: relative; overflow: hidden;
+  }
+
+  .hero-card-main::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  }
+
+  .card-icon-row {
+    display: flex; gap: 10px; margin-bottom: 20px;
+  }
+
+  .card-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+  }
+
+  .card-icon.orange { background: var(--accent-soft); }
+  .card-icon.blue { background: #eef2ff; }
+  .card-icon.green { background: #edfaf4; }
+
+  .card-title { font-size: 1.1rem; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
+  .card-sub { font-size: 0.85rem; color: var(--text-sub); }
+
+  .progress-list { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
+
+  .progress-item label { font-size: 0.82rem; font-weight: 500; color: var(--text-sub); display: block; margin-bottom: 5px; }
+
+  .progress-bar { background: var(--light-gray); border-radius: 4px; height: 6px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--accent), var(--accent-light)); }
+
+  .hero-card-mini {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  }
+
+  .mini-card {
+    background: white; border-radius: 14px; padding: 18px;
+    box-shadow: var(--shadow-sm); border: 1px solid var(--mid-gray);
+    display: flex; flex-direction: column; gap: 8px;
+  }
+
+  .mini-card-icon { font-size: 1.6rem; }
+  .mini-card-label { font-size: 0.78rem; color: var(--text-light); font-weight: 500; }
+  .mini-card-val { font-size: 1.1rem; font-weight: 700; color: var(--primary); }
+
+  /* ──── SECTIONS COMMON ──── */
+  section { padding: 100px 5%; }
+
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+
+  .section-eyebrow {
+    display: inline-block;
+    background: var(--accent-soft); color: var(--accent);
+    padding: 5px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 700;
+    letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 14px;
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 800; color: var(--primary); letter-spacing: -0.5px;
+    line-height: 1.2; margin-bottom: 16px;
+  }
+
+  .section-sub {
+    font-size: 1rem; color: var(--text-sub); max-width: 580px; line-height: 1.75;
+  }
+
+  .section-header { margin-bottom: 60px; }
+
+  .section-header.center { text-align: center; }
+  .section-header.center .section-sub { margin: 0 auto; }
+
+  /* ──── ABOUT ──── */
+  #about { background: var(--white); }
+
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center;
+  }
+
+  .about-visual {
+    position: relative;
+  }
+
+  .about-img-box {
+    background: linear-gradient(135deg, var(--primary) 0%, #2d2d5e 100%);
+    border-radius: 24px; padding: 40px; aspect-ratio: 4/3;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    overflow: hidden; position: relative;
+  }
+
+  .about-img-box::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .about-img-text { position: relative; z-index: 1; }
+  .about-img-text h3 { color: white; font-size: 1.5rem; font-weight: 800; }
+  .about-img-text p { color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-top: 6px; }
+
+  .about-badge-float {
+    position: absolute; top: -20px; right: -20px;
+    background: var(--accent); color: white; border-radius: 16px;
+    padding: 18px 22px; box-shadow: var(--shadow-md);
+    text-align: center;
+  }
+  .about-badge-float strong { display: block; font-size: 1.8rem; font-weight: 800; line-height: 1; }
+  .about-badge-float span { font-size: 0.75rem; font-weight: 500; opacity: 0.9; }
+
+  .about-content { display: flex; flex-direction: column; gap: 28px; }
+
+  .about-feature {
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+
+  .about-feature-icon {
+    width: 48px; height: 48px; min-width: 48px; border-radius: 12px;
+    background: var(--accent-soft); display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+  }
+
+  .about-feature h4 { font-size: 1rem; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
+  .about-feature p { font-size: 0.88rem; color: var(--text-sub); line-height: 1.65; }
+
+  /* ──── SERVICES ──── */
+  #services { background: var(--off-white); }
+
+  .services-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;
+  }
+
+  .service-card {
+    background: white; border-radius: var(--radius); padding: 28px;
+    border: 1px solid var(--mid-gray); transition: all 0.25s;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+
+  .service-card:hover {
+    border-color: var(--accent); transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .service-icon {
+    width: 52px; height: 52px; border-radius: 14px;
+    background: var(--accent-soft); display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; transition: background 0.2s;
+  }
+
+  .service-card:hover .service-icon { background: var(--accent); }
+
+  .service-card h3 { font-size: 1rem; font-weight: 700; color: var(--primary); }
+  .service-card p { font-size: 0.85rem; color: var(--text-sub); line-height: 1.65; }
+
+  .service-tag {
+    display: inline-block; background: var(--light-gray); color: var(--text-sub);
+    padding: 3px 10px; border-radius: 10px; font-size: 0.75rem; font-weight: 600;
+    margin-top: auto;
+  }
+
+  /* ──── WHY US ──── */
+  #why { background: var(--white); }
+
+  .why-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+  }
+
+  .why-card {
+    background: var(--off-white); border-radius: 20px; padding: 36px 28px;
+    border: 1px solid var(--mid-gray); transition: all 0.25s;
+    position: relative; overflow: hidden;
+  }
+
+  .why-card:hover { border-color: var(--accent); box-shadow: var(--shadow-md); }
+
+  .why-card::before {
+    content: attr(data-num);
+    position: absolute; top: -10px; right: 20px;
+    font-size: 5rem; font-weight: 900; color: rgba(232,104,26,0.06);
+    line-height: 1; font-family: inherit;
+  }
+
+  .why-icon { font-size: 2.2rem; margin-bottom: 20px; }
+  .why-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--primary); margin-bottom: 10px; }
+  .why-card p { font-size: 0.88rem; color: var(--text-sub); line-height: 1.7; }
+
+  /* ──── GOVT PARTNERS ──── */
+  #partners { background: var(--primary); padding: 80px 5%; }
+
+  #partners .section-eyebrow { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); }
+  #partners .section-title { color: white; }
+  #partners .section-sub { color: rgba(255,255,255,0.6); }
+
+  .partners-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px;
+    margin-top: 50px;
+  }
+
+  .partner-chip {
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 16px 20px;
+    display: flex; align-items: center; gap: 10px;
+    color: rgba(255,255,255,0.85); font-size: 0.85rem; font-weight: 500;
+    transition: all 0.2s;
+  }
+
+  .partner-chip:hover { background: rgba(232,104,26,0.15); border-color: rgba(232,104,26,0.4); }
+  .partner-chip .p-icon { font-size: 1.3rem; min-width: 24px; }
+
+  /* ──── PROCESS ──── */
+  #process { background: var(--off-white); }
+
+  .process-steps {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+    position: relative; margin-top: 60px;
+  }
+
+  .process-steps::before {
+    content: ''; position: absolute; top: 36px; left: 10%; right: 10%;
+    height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent-light));
+    z-index: 0;
+  }
+
+  .process-step {
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    padding: 0 20px; position: relative; z-index: 1;
+  }
+
+  .step-num {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: white; border: 3px solid var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; font-weight: 800; color: var(--accent);
+    margin-bottom: 20px; box-shadow: var(--shadow-sm);
+    position: relative; z-index: 1;
+  }
+
+  .process-step h4 { font-size: 0.95rem; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
+  .process-step p { font-size: 0.82rem; color: var(--text-sub); line-height: 1.65; }
+
+  /* ──── LOCATION ──── */
+  #location { background: var(--white); }
+
+  .location-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;
+  }
+
+  .location-info { display: flex; flex-direction: column; gap: 24px; }
+
+  .location-card {
+    background: var(--off-white); border-radius: 16px; padding: 24px;
+    border: 1px solid var(--mid-gray); display: flex; gap: 16px; align-items: flex-start;
+  }
+
+  .location-card-icon {
+    width: 46px; height: 46px; min-width: 46px; border-radius: 12px;
+    background: var(--accent-soft); display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+  }
+
+  .location-card h4 { font-size: 0.9rem; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
+  .location-card p, .location-card a {
+    font-size: 0.88rem; color: var(--text-sub); line-height: 1.6; text-decoration: none;
+  }
+  .location-card a:hover { color: var(--accent); }
+
+  .map-placeholder {
+    background: linear-gradient(135deg, #e8eef8 0%, #d4ddf0 100%);
+    border-radius: 20px; height: 380px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    border: 1px solid var(--mid-gray); gap: 12px;
+    font-size: 3rem;
+  }
+
+  .map-placeholder p { font-size: 0.9rem; color: var(--text-sub); font-weight: 500; }
+
+  /* ──── CTA BANNER ──── */
+  .cta-banner {
+    background: linear-gradient(135deg, var(--accent) 0%, #c45214 100%);
+    padding: 80px 5%; text-align: center;
+  }
+
+  .cta-banner h2 { font-size: 2.4rem; font-weight: 800; color: white; margin-bottom: 14px; }
+  .cta-banner p { color: rgba(255,255,255,0.85); font-size: 1rem; margin-bottom: 36px; max-width: 500px; margin-left: auto; margin-right: auto; }
+
+  .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  .btn-white {
+    background: white; color: var(--accent); padding: 14px 28px;
+    border-radius: 28px; font-size: 0.95rem; font-weight: 700;
+    text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.2); }
+
+  .btn-outline-white {
+    background: transparent; color: white; padding: 13px 28px;
+    border-radius: 28px; font-size: 0.95rem; font-weight: 600;
+    text-decoration: none; border: 2px solid rgba(255,255,255,0.5);
+    transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-outline-white:hover { background: rgba(255,255,255,0.15); border-color: white; }
+
+  /* ──── FOOTER ──── */
+  footer {
+    background: var(--primary); color: rgba(255,255,255,0.7); padding: 70px 5% 32px;
+  }
+
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+    max-width: 1200px; margin: 0 auto 48px;
+  }
+
+  .footer-brand h3 { color: white; font-size: 1.4rem; font-weight: 800; margin-bottom: 10px; }
+  .footer-brand h3 span { color: var(--accent); }
+  .footer-brand p { font-size: 0.88rem; line-height: 1.75; max-width: 280px; }
+
+  .footer-col h4 { color: white; font-size: 0.9rem; font-weight: 700; margin-bottom: 16px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+  .footer-col ul a:hover { color: var(--accent); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 28px; display: flex; justify-content: space-between; align-items: center;
+    max-width: 1200px; margin: 0 auto;
+  }
+
+  .footer-bottom p { font-size: 0.82rem; }
+
+  /* ──── FLOATING BTNS ──── */
+  .float-btns {
+    position: fixed; bottom: 28px; left: 28px; z-index: 2000;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+
+  .float-btn {
+    width: 54px; height: 54px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    transition: all 0.25s; position: relative;
+    border: none; cursor: pointer;
+  }
+
+  .float-btn:hover { transform: scale(1.1) translateY(-2px); }
+
+  .float-btn.whatsapp { background: #25d366; }
+  .float-btn.call { background: var(--accent); }
+
+  .float-btn svg { width: 24px; height: 24px; fill: white; }
+
+  .float-tooltip {
+    position: absolute; left: 66px;
+    background: var(--primary); color: white; padding: 6px 12px; border-radius: 8px;
+    font-size: 0.8rem; font-weight: 600; white-space: nowrap;
+    opacity: 0; pointer-events: none; transition: opacity 0.2s;
+  }
+
+  html[lang="ar"] .float-btns { left: auto; right: 28px; }
+  html[lang="ar"] .float-tooltip { left: auto; right: 66px; }
+
+  .float-btn:hover .float-tooltip { opacity: 1; }
+
+  /* ──── MOBILE MENU ──── */
+  .mobile-menu {
+    display: none; position: fixed; top: 72px; left: 0; right: 0; bottom: 0;
+    background: white; z-index: 999; flex-direction: column; padding: 32px 5%;
+    overflow-y: auto;
+  }
+
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { padding: 16px 0; border-bottom: 1px solid var(--mid-gray); font-size: 1.1rem; font-weight: 500; color: var(--text-main); text-decoration: none; }
+  .mobile-menu a:hover { color: var(--accent); }
+
+  /* ──── RESPONSIVE ──── */
+  @media (max-width: 1024px) {
+    .why-grid { grid-template-columns: 1fr 1fr; }
+    .process-steps { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .process-steps::before { display: none; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .about-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; }
+    .location-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    .hero-stats { gap: 24px; }
+  }
+
+  /* ──── SCROLL ANIMATION ──── */
+  .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* ──── MOTTO STRIP ──── */
+  .motto-strip {
+    background: var(--accent); padding: 14px 5%;
+    display: flex; align-items: center; justify-content: center;
+    gap: 20px; overflow: hidden;
+  }
+
+  .motto-strip p {
+    color: white; font-size: 0.88rem; font-weight: 600; white-space: nowrap;
+    letter-spacing: 0.3px;
+  }
+
+  .motto-sep { color: rgba(255,255,255,0.4); }
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <div class="nav-logo-text">TYPE<span>X</span>PERT<span style="font-size:0.5em;font-weight:400;color:var(--text-light);margin-left:6px;" data-en="Typing Services" data-ar="خدمات الطباعة">Typing Services</span></div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about" data-en="About" data-ar="من نحن">About</a></li>
+    <li><a href="#services" data-en="Services" data-ar="خدماتنا">Services</a></li>
+    <li><a href="#why" data-en="Why Us" data-ar="لماذا نحن">Why Us</a></li>
+    <li><a href="#partners" data-en="Partners" data-ar="الشركاء">Partners</a></li>
+    <li><a href="#location" data-en="Contact" data-ar="تواصل معنا">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="lang-btn" id="langToggle" onclick="toggleLang()">عربي</button>
+    <a href="https://wa.me/971508386831" class="nav-cta" data-en="Get Started" data-ar="ابدأ الآن">Get Started</a>
+    <button class="hamburger" onclick="toggleMenu()" id="hamburger">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMenu()" data-en="About Us" data-ar="من نحن">About Us</a>
+  <a href="#services" onclick="closeMenu()" data-en="Our Services" data-ar="خدماتنا">Our Services</a>
+  <a href="#why" onclick="closeMenu()" data-en="Why Choose Us" data-ar="لماذا نحن">Why Choose Us</a>
+  <a href="#partners" onclick="closeMenu()" data-en="Government Partners" data-ar="الشركاء الحكوميون">Government Partners</a>
+  <a href="#process" onclick="closeMenu()" data-en="How It Works" data-ar="كيف نعمل">How It Works</a>
+  <a href="#location" onclick="closeMenu()" data-en="Contact & Location" data-ar="التواصل والموقع">Contact & Location</a>
+</div>
+
+<!-- MOTTO STRIP -->
+<div class="motto-strip" style="margin-top:72px;">
+  <p data-en="🚀 Speed, Accuracy, and Efficiency" data-ar="🚀 السرعة، الدقة، والكفاءة">🚀 Speed, Accuracy, and Efficiency</p>
+  <span class="motto-sep">•</span>
+  <p data-en="We Can Complete Transactions Online" data-ar="يمكننا إنجاز المعاملات أونلاين">We Can Complete Transactions Online</p>
+  <span class="motto-sep">•</span>
+  <p data-en="📍 Abu Dhabi & Dubai" data-ar="📍 أبوظبي ودبي">📍 Abu Dhabi & Dubai</p>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge"><span></span><span data-en="Certified Typing Center – UAE" data-ar="مركز طباعة معتمد – الإمارات">Certified Typing Center – UAE</span></div>
+      <h1 data-en="Your Trusted <em>Typing &</em><br>Government Services<br>Partner in UAE" data-ar="شريكك الموثوق في<br><em>خدمات الطباعة</em><br>والمعاملات الحكومية">Your Trusted <em>Typing &</em><br>Government Services<br>Partner in UAE</h1>
+      <p data-en="TypeXpert provides fast, accurate, and professional typing and government transaction services in Abu Dhabi and Dubai. We handle everything online — so you don't have to." data-ar="تايب إكسبرت تقدم خدمات طباعة ومعاملات حكومية سريعة ودقيقة واحترافية في أبوظبي ودبي. نُنجز كل شيء أونلاين — فلا تتعب نفسك.">TypeXpert provides fast, accurate, and professional typing and government transaction services in Abu Dhabi and Dubai. We handle everything online — so you don't have to.</p>
+      <div class="hero-btns">
+        <a href="https://wa.me/971508386831" class="btn-primary" data-en="💬 WhatsApp Us" data-ar="💬 راسلنا على واتساب">💬 WhatsApp Us</a>
+        <a href="#services" class="btn-secondary" data-en="Explore Services →" data-ar="استكشف الخدمات ←">Explore Services →</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">10<span>+</span></div><div class="stat-label" data-en="Years Experience" data-ar="سنوات خبرة">Years Experience</div></div>
+        <div class="stat"><div class="stat-num">15<span>k+</span></div><div class="stat-label" data-en="Transactions Done" data-ar="معاملة منجزة">Transactions Done</div></div>
+        <div class="stat"><div class="stat-num">2</div><div class="stat-label" data-en="Locations" data-ar="موقعان">Locations</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card-main">
+        <div class="card-icon-row">
+          <div class="card-icon orange">🏛️</div>
+          <div class="card-icon blue">📋</div>
+          <div class="card-icon green">✅</div>
+        </div>
+        <div class="card-title" data-en="Government Transaction Status" data-ar="حالة المعاملة الحكومية">Government Transaction Status</div>
+        <div class="card-sub" data-en="Real-time tracking & completion" data-ar="متابعة وإنجاز فوري">Real-time tracking & completion</div>
+        <div class="progress-list">
+          <div class="progress-item"><label data-en="Ministry of Interior" data-ar="وزارة الداخلية">Ministry of Interior</label><div class="progress-bar"><div class="progress-fill" style="width:95%"></div></div></div>
+          <div class="progress-item"><label data-en="Federal Identity Authority (ICA)" data-ar="الهيئة الاتحادية للهوية">Federal Identity Authority (ICA)</label><div class="progress-bar"><div class="progress-fill" style="width:88%"></div></div></div>
+          <div class="progress-item"><label data-en="TAMM – Abu Dhabi Services" data-ar="تم – خدمات أبوظبي">TAMM – Abu Dhabi Services</label><div class="progress-bar"><div class="progress-fill" style="width:92%"></div></div></div>
+        </div>
+      </div>
+      <div class="hero-card-mini">
+        <div class="mini-card"><div class="mini-card-icon">⚡</div><div class="mini-card-label" data-en="Avg. Processing" data-ar="متوسط الإنجاز">Avg. Processing</div><div class="mini-card-val" data-en="Same Day" data-ar="نفس اليوم">Same Day</div></div>
+        <div class="mini-card"><div class="mini-card-icon">🌐</div><div class="mini-card-label" data-en="Coverage" data-ar="التغطية">Coverage</div><div class="mini-card-val" data-en="AUH + DXB" data-ar="أبوظبي + دبي">AUH + DXB</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-visual fade-up">
+        <div class="about-img-box">
+          <div style="position:absolute;top:30px;left:30px;right:30px;display:flex;gap:12px;flex-wrap:wrap;">
+            <div style="background:rgba(255,255,255,0.12);border-radius:10px;padding:10px 16px;color:white;font-size:0.82rem;font-weight:600;">Abu Dhabi ✓</div>
+            <div style="background:rgba(255,255,255,0.12);border-radius:10px;padding:10px 16px;color:white;font-size:0.82rem;font-weight:600;">Dubai ✓</div>
+            <div style="background:rgba(232,104,26,0.6);border-radius:10px;padding:10px 16px;color:white;font-size:0.82rem;font-weight:600;">Online ✓</div>
+          </div>
+          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:5rem;opacity:0.15;">🏢</div>
+          <div class="about-img-text">
+            <h3>Al Khazna Tower</h3>
+            <p>15th Floor, Office #1525 · Al Najda Street, Abu Dhabi</p>
+          </div>
+        </div>
+        <div class="about-badge-float">
+          <strong>10+</strong>
+          <span data-en="Years Trusted" data-ar="سنوات موثوقة">Years Trusted</span>
+        </div>
+      </div>
+      <div class="about-content fade-up">
+        <div>
+          <div class="section-eyebrow" data-en="Who We Are" data-ar="من نحن">Who We Are</div>
+          <h2 class="section-title" data-en="TypeXpert — Built for<br>Speed & Precision" data-ar="تايب إكسبرت — مبنية<br>للسرعة والدقة">TypeXpert — Built for<br>Speed & Precision</h2>
+          <p class="section-sub" data-en="TypeXpert is a leading typing center and government transaction facilitator based in Abu Dhabi, serving clients across the UAE. We combine expertise in official documentation with cutting-edge online processing capabilities." data-ar="تايب إكسبرت هي مركز طباعة ومعاملات حكومية رائد مقره أبوظبي، يخدم العملاء في جميع أنحاء الإمارات. نجمع بين الخبرة في الوثائق الرسمية وقدرات المعالجة الأونلاين المتطورة.">TypeXpert is a leading typing center and government transaction facilitator based in Abu Dhabi, serving clients across the UAE. We combine expertise in official documentation with cutting-edge online processing capabilities.</p>
+        </div>
+        <div class="about-feature"><div class="about-feature-icon">🎯</div><div><h4 data-en="Speed & Accuracy" data-ar="السرعة والدقة">Speed & Accuracy</h4><p data-en="Every transaction is handled with precision and completed at the fastest possible pace — our motto is speed without compromising accuracy." data-ar="كل معاملة تُعالج بدقة وتُنجز في أسرع وقت ممكن — شعارنا السرعة دون المساس بالدقة.">Every transaction is handled with precision and completed at the fastest possible pace — our motto is speed without compromising accuracy.</p></div></div>
+        <div class="about-feature"><div class="about-feature-icon">🌐</div><div><h4 data-en="100% Online Capable" data-ar="قادرون على الإنجاز الأونلاين بالكامل">100% Online Capable</h4><p data-en="We can complete all transactions and government services online — saving you time and removing the need for physical visits to government offices." data-ar="نستطيع إنجاز جميع المعاملات والخدمات الحكومية أونلاين — توفيراً لوقتك وإزالة للحاجة إلى زيارة الدوائر الحكومية.">We can complete all transactions and government services online — saving you time and removing the need for physical visits to government offices.</p></div></div>
+        <div class="about-feature"><div class="about-feature-icon">🤝</div><div><h4 data-en="Multi-Emirate Coverage" data-ar="تغطية متعددة الإمارات">Multi-Emirate Coverage</h4><p data-en="With established operations in both Abu Dhabi and Dubai, we serve the full spectrum of government entities across the UAE." data-ar="بعملياتنا الراسخة في أبوظبي ودبي، نخدم جميع الجهات الحكومية في الإمارات.">With established operations in both Abu Dhabi and Dubai, we serve the full spectrum of government entities across the UAE.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <div class="section-header center fade-up">
+      <div class="section-eyebrow" data-en="Our Services" data-ar="خدماتنا">Our Services</div>
+      <h2 class="section-title" data-en="Everything You Need,<br>All in One Place" data-ar="كل ما تحتاجه،<br>في مكان واحد">Everything You Need,<br>All in One Place</h2>
+      <p class="section-sub" data-en="From government typing to legal translation, health insurance to airline ticketing — we've got you covered." data-ar="من الطباعة الحكومية إلى الترجمة القانونية، والتأمين الصحي وحجوزات الطيران — نحن نغطي كل احتياجاتك.">From government typing to legal translation, health insurance to airline ticketing — we've got you covered.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card fade-up">
+        <div class="service-icon">🏛️</div>
+        <h3 data-en="Ministry of Interior" data-ar="وزارة الداخلية">Ministry of Interior</h3>
+        <p data-en="Visa applications, entry permits, residency renewals, and all MOI transactions processed swiftly." data-ar="طلبات التأشيرة، تصاريح الدخول، تجديد الإقامة وجميع معاملات وزارة الداخلية.">Visa applications, entry permits, residency renewals, and all MOI transactions processed swiftly.</p>
+        <span class="service-tag" data-en="Government" data-ar="حكومية">Government</span>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">🪪</div>
+        <h3 data-en="Federal Identity & Citizenship (ICA)" data-ar="الهيئة الاتحادية للهوية والجنسية">Federal Identity & Citizenship (ICA)</h3>
+        <p data-en="Emirates ID, citizenship, and passport services processed with full compliance." data-ar="الهوية الإماراتية والجنسية والجواز، جميعها تُعالج بالامتثال الكامل.">Emirates ID, citizenship, and passport services processed with full compliance.</p>
+        <span class="service-tag" data-en="Identity" data-ar="هوية">Identity</span>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">🏥</div>
+        <h3 data-en="Health Insurance (HAAD / DHA)" data-ar="التأمين الصحي (هيئة الصحة)">Health Insurance (HAAD / DHA)</h3>
+        <p data-en="Health insurance enrollment, renewal, and claims support for Abu Dhabi and Dubai authorities." data-ar="تسجيل التأمين الصحي، التجديد، ودعم المطالبات لهيئات أبوظبي ودبي.">Health insurance enrollment, renewal, and claims support for Abu Dhabi and Dubai authorities.</p>
+        <span class="service-tag" data-en="Health" data-ar="صحة">Health</span>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">🌆</div>
+        <h3 data-en="TAMM – Abu Dhabi Services" data-ar="تم – خدمات أبوظبي الحكومية">TAMM – Abu Dhabi Services</h3>
+        <p data-en="Full range of Abu Dhabi government digital services via the TAMM platform, handled on your behalf." data-ar="طيف كامل من خدمات أبوظبي الحكومية الرقمية عبر منصة تم، نُنجزها نيابة عنك.">Full range of Abu Dhabi government digital services via the TAMM platform, handled on your behalf.</p>
+        <span class="service-tag" data-en="Abu Dhabi" data-ar="أبوظبي">Abu Dhabi</span>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">🚔</div>
+        <h3 data-en="Police Services (Abu Dhabi & Dubai)" data-ar="خدمات الشرطة (أبوظبي ودبي)">Police Services (Abu Dhabi & Dubai)</h3>
+        <p data-en="AD Police e-services, Dubai Police electronic transactions, fines, certificates, and more." data-ar="الخدمات الإلكترونية لشرطة أبوظبي ودبي، المخالفات، الشهادات وغيرها.">AD Police e-services, Dubai Police electronic transactions, fines, certificates, and more.</p>
+        <span class="service-tag" data-en="Police" data-ar="شرطة">Police</span>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">💡</div>
+        <h3 data-en="DEWA Services" data-ar="خدمات هيئة كهرباء ومياه دبي">DEWA Services</h3>
+        <p data-en="Electricity and water connection, disconnection, bill management, and account setup in Dubai." data-ar="تركيب وقطع الكهرباء والمياه، إدارة الفواتير وإعداد الحسابات في دبي.">Electricity and water connection, disconnection, bill management, and account setup in Dubai.</p>
+        <span class="service-tag" data-en="Utilities" data-ar="مرافق">Utilities</span>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">🏢</div>
+        <h3 data-en="Dept. of Economic Development" data-ar="دائرة التنمية الاقتصادية">Dept. of Economic Development</h3>
+        <p data-en="Trade license applications, renewals, business registration, and DED transactions." data-ar="طلبات الرخصة التجارية، التجديدات، تسجيل الأعمال ومعاملات الدائرة.">Trade license applications, renewals, business registration, and DED transactions.</p>
+        <span class="service-tag" data-en="Business" data-ar="أعمال">Business</span>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">⚖️</div>
+        <h3 data-en="Judicial Department" data-ar="دائرة القضاء">Judicial Department</h3>
+        <p data-en="Court-related documentation, attestations, and judicial transactions handled efficiently." data-ar="الوثائق القضائية، التصديقات، والمعاملات المحكمية تُعالج بكفاءة.">Court-related documentation, attestations, and judicial transactions handled efficiently.</p>
+        <span class="service-tag" data-en="Legal" data-ar="قانونية">Legal</span>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">🛡️</div>
+        <h3 data-en="Civil Defence Services" data-ar="خدمات الدفاع المدني">Civil Defence Services</h3>
+        <p data-en="Fire safety certificates, civil defence approvals, and building compliance documentation." data-ar="شهادات السلامة من الحريق، موافقات الدفاع المدني، ووثائق الامتثال الإنشائي.">Fire safety certificates, civil defence approvals, and building compliance documentation.</p>
+        <span class="service-tag" data-en="Safety" data-ar="سلامة">Safety</span>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">🌍</div>
+        <h3 data-en="Ministry of Foreign Affairs" data-ar="وزارة الخارجية والتعاون الدولي">Ministry of Foreign Affairs</h3>
+        <p data-en="Document attestation, authentication, and MOFA-related services processed professionally." data-ar="تصديق وثائق وخدمات وزارة الخارجية تُعالج باحترافية.">Document attestation, authentication, and MOFA-related services processed professionally.</p>
+        <span class="service-tag" data-en="Attestation" data-ar="تصديق">Attestation</span>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">🌐</div>
+        <h3 data-en="Legal Translation Services" data-ar="خدمات الترجمة القانونية">Legal Translation Services</h3>
+        <p data-en="Certified translation of official documents between Arabic, English, and other languages." data-ar="ترجمة معتمدة للوثائق الرسمية بين العربية والإنجليزية وغيرها.">Certified translation of official documents between Arabic, English, and other languages.</p>
+        <span class="service-tag" data-en="Translation" data-ar="ترجمة">Translation</span>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">✈️</div>
+        <h3 data-en="Airline Reservations & Ticketing" data-ar="حجز تذاكر الطيران">Airline Reservations & Ticketing</h3>
+        <p data-en="Flight bookings, itinerary planning, and ticketing services for all major airlines." data-ar="حجز الرحلات الجوية، تخطيط المسار، وخدمات التذاكر لجميع الخطوط الكبرى.">Flight bookings, itinerary planning, and ticketing services for all major airlines.</p>
+        <span class="service-tag" data-en="Travel" data-ar="سفر">Travel</span>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">🏠</div>
+        <h3 data-en="Residential Tenancy Contracts" data-ar="عقود الإيجار السكنية">Residential Tenancy Contracts</h3>
+        <p data-en="Ejari and Tawtheeq tenancy contract registration and renewal for landlords and tenants." data-ar="تسجيل وتجديد عقود الإيجار (إيجاري وتوثيق) للملاك والمستأجرين.">Ejari and Tawtheeq tenancy contract registration and renewal for landlords and tenants.</p>
+        <span class="service-tag" data-en="Real Estate" data-ar="عقارات">Real Estate</span>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">👷</div>
+        <h3 data-en="Domestic Workers' Services" data-ar="خدمات العمالة المنزلية">Domestic Workers' Services</h3>
+        <p data-en="Sponsorship transfers, work permits, and Ministry of Human Resources transactions for domestic staff." data-ar="نقل الكفالة وتصاريح العمل ومعاملات وزارة الموارد البشرية للعمالة المنزلية.">Sponsorship transfers, work permits, and Ministry of Human Resources transactions for domestic staff.</p>
+        <span class="service-tag" data-en="HR Services" data-ar="موارد بشرية">HR Services</span>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">🏅</div>
+        <h3 data-en="Corporate PRO Services" data-ar="خدمات البي آر أو للشركات">Corporate PRO Services</h3>
+        <p data-en="End-to-end government liaison and document processing services for companies and businesses." data-ar="خدمات التواصل الحكومي الشاملة ومعالجة الوثائق للشركات والمؤسسات.">End-to-end government liaison and document processing services for companies and businesses.</p>
+        <span class="service-tag" data-en="Corporate" data-ar="شركات">Corporate</span>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">🏙️</div>
+        <h3 data-en="Municipalities & Transport (DMT)" data-ar="البلديات والنقل (DMT)">Municipalities & Transport (DMT)</h3>
+        <p data-en="Building permits, municipality fees, transport registrations, and DMT-related transactions." data-ar="تصاريح البناء، رسوم البلدية، تسجيلات النقل ومعاملات الدائرة.">Building permits, municipality fees, transport registrations, and DMT-related transactions.</p>
+        <span class="service-tag" data-en="Municipality" data-ar="بلدية">Municipality</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="section-inner">
+    <div class="section-header center fade-up">
+      <div class="section-eyebrow" data-en="Why TypeXpert" data-ar="لماذا تايب إكسبرت">Why TypeXpert</div>
+      <h2 class="section-title" data-en="The TypeXpert Difference" data-ar="ما يميز تايب إكسبرت">The TypeXpert Difference</h2>
+      <p class="section-sub" data-en="We don't just type — we take ownership of your transaction from start to finish." data-ar="نحن لا نطبع فحسب — نتحمل مسؤولية معاملتك من البداية إلى النهاية.">We don't just type — we take ownership of your transaction from start to finish.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card fade-up" data-num="01"><div class="why-icon">⚡</div><h3 data-en="Lightning-Fast Processing" data-ar="معالجة فائقة السرعة">Lightning-Fast Processing</h3><p data-en="Most transactions are completed same-day. We understand the urgency of government deadlines and work accordingly." data-ar="معظم المعاملات تُنجز في نفس اليوم. نحن نفهم أهمية مواعيد الحكومة ونعمل وفق ذلك.">Most transactions are completed same-day. We understand the urgency of government deadlines and work accordingly.</p></div>
+      <div class="why-card fade-up" data-num="02"><div class="why-icon">🎯</div><h3 data-en="Zero Error Guarantee" data-ar="ضمان خلو من الأخطاء">Zero Error Guarantee</h3><p data-en="Our experienced team double-checks every document before submission. Accuracy is non-negotiable at TypeXpert." data-ar="فريقنا المتمرس يراجع كل وثيقة قبل التقديم. الدقة أمر غير قابل للتفاوض في تايب إكسبرت.">Our experienced team double-checks every document before submission. Accuracy is non-negotiable at TypeXpert.</p></div>
+      <div class="why-card fade-up" data-num="03"><div class="why-icon">🌐</div><h3 data-en="Fully Online Capable" data-ar="قادرون على العمل الأونلاين الكامل">Fully Online Capable</h3><p data-en="No need to visit government offices. We complete all transactions digitally through official government portals." data-ar="لا حاجة لزيارة الدوائر الحكومية. نُنجز جميع المعاملات رقمياً عبر البوابات الحكومية الرسمية.">No need to visit government offices. We complete all transactions digitally through official government portals.</p></div>
+      <div class="why-card fade-up" data-num="04"><div class="why-icon">💼</div><h3 data-en="Expert Team" data-ar="فريق من الخبراء">Expert Team</h3><p data-en="Our staff are specialists in UAE government procedures with years of on-ground experience in Abu Dhabi and Dubai." data-ar="موظفونا متخصصون في الإجراءات الحكومية الإماراتية بسنوات من الخبرة الميدانية في أبوظبي ودبي.">Our staff are specialists in UAE government procedures with years of on-ground experience in Abu Dhabi and Dubai.</p></div>
+      <div class="why-card fade-up" data-num="05"><div class="why-icon">🔒</div><h3 data-en="100% Confidential" data-ar="سرية تامة 100%">100% Confidential</h3><p data-en="Your personal information and documents are handled with the utmost confidentiality and security." data-ar="معلوماتك الشخصية ووثائقك تُعالج بأقصى درجات السرية والأمان.">Your personal information and documents are handled with the utmost confidentiality and security.</p></div>
+      <div class="why-card fade-up" data-num="06"><div class="why-icon">📞</div><h3 data-en="Follow-Up Support" data-ar="دعم ومتابعة">Follow-Up Support</h3><p data-en="We don't disappear after submission. We follow up your transaction until fully completed and delivered." data-ar="لا نختفي بعد التقديم. نتابع معاملتك حتى اكتمالها وتسليمها لك.">We don't disappear after submission. We follow up your transaction until fully completed and delivered.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- GOVT PARTNERS -->
+<section id="partners">
+  <div class="section-inner">
+    <div class="section-header center fade-up">
+      <div class="section-eyebrow" data-en="Government Partners" data-ar="الجهات الحكومية">Government Partners</div>
+      <h2 class="section-title" data-en="Official Portals We Work With" data-ar="البوابات الرسمية التي نعمل معها">Official Portals We Work With</h2>
+      <p class="section-sub" data-en="TypeXpert is connected to all major UAE federal and local government digital systems." data-ar="تايب إكسبرت متصل بجميع الأنظمة الرقمية الحكومية الفيدرالية والمحلية الكبرى في الإمارات.">TypeXpert is connected to all major UAE federal and local government digital systems.</p>
+    </div>
+    <div class="partners-grid fade-up">
+      <div class="partner-chip"><span class="p-icon">🏛️</span><span data-en="Ministry of Interior" data-ar="وزارة الداخلية">Ministry of Interior</span></div>
+      <div class="partner-chip"><span class="p-icon">🪪</span><span data-en="ICA – Identity & Citizenship" data-ar="الهيئة الاتحادية للهوية والجنسية">ICA – Identity & Citizenship</span></div>
+      <div class="partner-chip"><span class="p-icon">👷</span><span data-en="Ministry of Human Resources" data-ar="وزارة الموارد البشرية والتوطين">Ministry of Human Resources</span></div>
+      <div class="partner-chip"><span class="p-icon">🌆</span><span data-en="TAMM – Abu Dhabi" data-ar="تم – أبوظبي">TAMM – Abu Dhabi</span></div>
+      <div class="partner-chip"><span class="p-icon">🚔</span><span data-en="Dubai Police" data-ar="شرطة دبي">Dubai Police</span></div>
+      <div class="partner-chip"><span class="p-icon">🚨</span><span data-en="Abu Dhabi Police" data-ar="شرطة أبوظبي">Abu Dhabi Police</span></div>
+      <div class="partner-chip"><span class="p-icon">💡</span><span data-en="DEWA" data-ar="هيئة كهرباء ومياه دبي">DEWA</span></div>
+      <div class="partner-chip"><span class="p-icon">⚡</span><span data-en="TAQA Energy" data-ar="طاقة">TAQA Energy</span></div>
+      <div class="partner-chip"><span class="p-icon">🏥</span><span data-en="Health Insurance (HAAD/DHA)" data-ar="التأمين الصحي (هيئة الصحة)">Health Insurance (HAAD/DHA)</span></div>
+      <div class="partner-chip"><span class="p-icon">🏢</span><span data-en="Dept. of Economic Development" data-ar="دائرة التنمية الاقتصادية">Dept. of Economic Development</span></div>
+      <div class="partner-chip"><span class="p-icon">⚖️</span><span data-en="Judicial Department" data-ar="دائرة القضاء">Judicial Department</span></div>
+      <div class="partner-chip"><span class="p-icon">🛡️</span><span data-en="Civil Defence" data-ar="الدفاع المدني">Civil Defence</span></div>
+      <div class="partner-chip"><span class="p-icon">🌍</span><span data-en="Ministry of Foreign Affairs" data-ar="وزارة الخارجية والتعاون الدولي">Ministry of Foreign Affairs</span></div>
+      <div class="partner-chip"><span class="p-icon">🏙️</span><span data-en="Municipalities & Transport (DMT)" data-ar="البلديات والنقل">Municipalities & Transport (DMT)</span></div>
+      <div class="partner-chip"><span class="p-icon">🤝</span><span data-en="Embassy Services" data-ar="خدمات السفارات">Embassy Services</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="section-inner">
+    <div class="section-header center fade-up">
+      <div class="section-eyebrow" data-en="How It Works" data-ar="كيف نعمل">How It Works</div>
+      <h2 class="section-title" data-en="Your Transaction in 4 Steps" data-ar="معاملتك في 4 خطوات">Your Transaction in 4 Steps</h2>
+      <p class="section-sub" data-en="A smooth, transparent process designed to put you at ease from start to finish." data-ar="عملية سلسة وشفافة مصممة لتريحك من البداية إلى النهاية.">A smooth, transparent process designed to put you at ease from start to finish.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step fade-up"><div class="step-num">1</div><h4 data-en="Contact Us" data-ar="تواصل معنا">Contact Us</h4><p data-en="Reach out via WhatsApp or call — explain your requirement in seconds." data-ar="تواصل معنا عبر واتساب أو اتصل — اشرح احتياجك في ثوانٍ.">Reach out via WhatsApp or call — explain your requirement in seconds.</p></div>
+      <div class="process-step fade-up"><div class="step-num">2</div><h4 data-en="Send Documents" data-ar="أرسل الوثائق">Send Documents</h4><p data-en="Share the required documents digitally — we handle the rest securely." data-ar="شارك الوثائق المطلوبة رقمياً — نحن نتولى الباقي بأمان.">Share the required documents digitally — we handle the rest securely.</p></div>
+      <div class="process-step fade-up"><div class="step-num">3</div><h4 data-en="We Process" data-ar="نحن نُعالج">We Process</h4><p data-en="Our experts handle your transaction through official government portals with full accuracy." data-ar="خبراؤنا يُعالجون معاملتك عبر البوابات الحكومية الرسمية بدقة تامة.">Our experts handle your transaction through official government portals with full accuracy.</p></div>
+      <div class="process-step fade-up"><div class="step-num">4</div><h4 data-en="Done & Delivered" data-ar="منجزة وتُسلَّم">Done & Delivered</h4><p data-en="You receive the completed transaction — most done the same day." data-ar="تستلم المعاملة المنجزة — معظمها يُنجز في نفس اليوم.">You receive the completed transaction — most done the same day.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section id="location">
+  <div class="section-inner">
+    <div class="location-grid">
+      <div class="fade-up">
+        <div class="section-eyebrow" data-en="Find Us" data-ar="أين نحن">Find Us</div>
+        <h2 class="section-title" style="margin-bottom:12px;" data-en="Contact &<br>Location" data-ar="التواصل<br>والموقع">Contact &<br>Location</h2>
+        <p class="section-sub" style="margin-bottom:36px;" data-en="Visit us at Al Khazna Tower in Abu Dhabi, or reach us online anytime." data-ar="زورنا في برج الخزنة بأبوظبي، أو تواصل معنا أونلاين في أي وقت.">Visit us at Al Khazna Tower in Abu Dhabi, or reach us online anytime.</p>
+        <div class="location-info">
+          <div class="location-card"><div class="location-card-icon">📍</div><div><h4 data-en="Address" data-ar="العنوان">Address</h4><p>Al Khazna Tower, 15th Floor, Office #1525<br>Al Najda Street, Abu Dhabi, UAE</p></div></div>
+          <div class="location-card"><div class="location-card-icon">📞</div><div><h4 data-en="Phone / WhatsApp" data-ar="الهاتف / واتساب">Phone / WhatsApp</h4><a href="tel:+971508386831">+971 50 838 6831</a><br><a href="tel:+971504467791" style="color:var(--text-sub)">+971 50 446 7791</a></div></div>
+          <div class="location-card"><div class="location-card-icon">✉️</div><div><h4 data-en="Email" data-ar="البريد الإلكتروني">Email</h4><a href="mailto:typexpert.services@gmail.com">typexpert.services@gmail.com</a></div></div>
+          <div class="location-card"><div class="location-card-icon">🕐</div><div><h4 data-en="Working Hours" data-ar="ساعات العمل">Working Hours</h4><p data-en="Mon – Sat: 8:00 AM – 8:00 PM" data-ar="الاثنين – السبت: 8 صباحاً – 8 مساءً">Mon – Sat: 8:00 AM – 8:00 PM</p></div></div>
+        </div>
+      </div>
+      <div class="fade-up">
+        <div class="map-placeholder">
+          <span>🗺️</span>
+          <p data-en="Al Khazna Tower · Abu Dhabi" data-ar="برج الخزنة · أبوظبي">Al Khazna Tower · Abu Dhabi</p>
+          <a href="https://maps.google.com/?q=Al+Khazna+Tower+Abu+Dhabi" target="_blank" class="btn-primary" style="font-size:0.85rem;padding:10px 20px;" data-en="📍 Open in Maps" data-ar="📍 افتح في الخرائط">📍 Open in Maps</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <h2 data-en="Ready to Get Started?" data-ar="مستعد للبدء؟">Ready to Get Started?</h2>
+  <p data-en="Contact TypeXpert today and let us handle your government transactions with speed and precision." data-ar="تواصل مع تايب إكسبرت اليوم ودعنا نتولى معاملاتك الحكومية بسرعة ودقة.">Contact TypeXpert today and let us handle your government transactions with speed and precision.</p>
+  <div class="cta-btns">
+    <a href="https://wa.me/971508386831" class="btn-white" data-en="💬 WhatsApp Now" data-ar="💬 واتساب الآن">💬 WhatsApp Now</a>
+    <a href="tel:+971508386831" class="btn-outline-white" data-en="📞 Call Us" data-ar="📞 اتصل بنا">📞 Call Us</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h3>TYPE<span>X</span>PERT</h3>
+      <p data-en="Your trusted typing center and government transaction partner in Abu Dhabi and Dubai, UAE." data-ar="مركزك الموثوق للطباعة والمعاملات الحكومية في أبوظبي ودبي، الإمارات.">Your trusted typing center and government transaction partner in Abu Dhabi and Dubai, UAE.</p>
+      <div style="margin-top:20px;display:flex;gap:10px;">
+        <a href="https://wa.me/971508386831" style="width:38px;height:38px;background:rgba(255,255,255,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.1rem;transition:background 0.2s;" onmouseover="this.style.background='rgba(37,211,102,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">💬</a>
+        <a href="tel:+971508386831" style="width:38px;height:38px;background:rgba(255,255,255,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.1rem;transition:background 0.2s;" onmouseover="this.style.background='rgba(232,104,26,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">📞</a>
+        <a href="mailto:typexpert.services@gmail.com" style="width:38px;height:38px;background:rgba(255,255,255,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.1rem;transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">✉️</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4 data-en="Services" data-ar="الخدمات">Services</h4>
+      <ul>
+        <li><a href="#services" data-en="Ministry of Interior" data-ar="وزارة الداخلية">Ministry of Interior</a></li>
+        <li><a href="#services" data-en="ICA Services" data-ar="الهيئة الاتحادية للهوية">ICA Services</a></li>
+        <li><a href="#services" data-en="Health Insurance" data-ar="التأمين الصحي">Health Insurance</a></li>
+        <li><a href="#services" data-en="Legal Translation" data-ar="الترجمة القانونية">Legal Translation</a></li>
+        <li><a href="#services" data-en="PRO Services" data-ar="خدمات PRO">PRO Services</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 data-en="Company" data-ar="الشركة">Company</h4>
+      <ul>
+        <li><a href="#about" data-en="About Us" data-ar="من نحن">About Us</a></li>
+        <li><a href="#why" data-en="Why Choose Us" data-ar="لماذا نحن">Why Choose Us</a></li>
+        <li><a href="#process" data-en="How It Works" data-ar="كيف نعمل">How It Works</a></li>
+        <li><a href="#partners" data-en="Partners" data-ar="الشركاء">Partners</a></li>
+        <li><a href="#location" data-en="Contact" data-ar="تواصل معنا">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 data-en="Contact" data-ar="تواصل">Contact</h4>
+      <ul>
+        <li><a href="tel:+971508386831">+971 50 838 6831</a></li>
+        <li><a href="tel:+971504467791">+971 50 446 7791</a></li>
+        <li><a href="mailto:typexpert.services@gmail.com">typexpert.services@gmail.com</a></li>
+        <li><a href="#location" data-en="Abu Dhabi Office" data-ar="مكتب أبوظبي">Abu Dhabi Office</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 TypeXpert Typing Services. <span data-en="All rights reserved." data-ar="جميع الحقوق محفوظة.">All rights reserved.</span></p>
+    <p data-en="Abu Dhabi · Dubai · UAE 🇦🇪" data-ar="أبوظبي · دبي · الإمارات 🇦🇪">Abu Dhabi · Dubai · UAE 🇦🇪</p>
+  </div>
+</footer>
+
+<!-- FLOATING BUTTONS -->
+<div class="float-btns">
+  <a href="https://wa.me/971508386831" class="float-btn whatsapp" target="_blank">
+    <div class="float-tooltip" data-en="Chat on WhatsApp" data-ar="دردشة على واتساب">Chat on WhatsApp</div>
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+  <a href="tel:+971508386831" class="float-btn call">
+    <div class="float-tooltip" data-en="Call Now" data-ar="اتصل الآن">Call Now</div>
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+  </a>
+</div>
+
+<script>
+  // ── LANGUAGE TOGGLE ──
+  let currentLang = 'en';
+
+  function toggleLang() {
+    currentLang = currentLang === 'en' ? 'ar' : 'en';
+    const html = document.documentElement;
+    html.setAttribute('lang', currentLang);
+    html.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+
+    const btn = document.getElementById('langToggle');
+    btn.textContent = currentLang === 'en' ? 'عربي' : 'English';
+
+    // Update all data-en/data-ar elements
+    document.querySelectorAll('[data-en]').forEach(el => {
+      const val = el.getAttribute('data-' + currentLang);
+      if (!val) return;
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.placeholder = val;
+      } else {
+        el.innerHTML = val;
+      }
+    });
+  }
+
+  // ── NAV SCROLL ──
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (window.scrollY > 20) {
+      nav.style.boxShadow = '0 4px 24px rgba(26,26,46,0.12)';
+    } else {
+      nav.style.boxShadow = '0 2px 12px rgba(26,26,46,0.07)';
+    }
+  });
+
+  // ── MOBILE MENU ──
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    menu.classList.toggle('open');
+  }
+
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
+  // ── FADE UP ON SCROLL ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // ── SMOOTH SCROLL ──
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
