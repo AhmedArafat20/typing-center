@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -535,7 +535,7 @@
 
   /* ──── FLOATING BTNS ──── */
   .float-btns {
-    position: fixed; bottom: 28px; left: 28px; z-index: 2000;
+    position: fixed; bottom: 28px; right: 28px; z-index: 2000;
     display: flex; flex-direction: column; gap: 12px;
   }
 
@@ -555,14 +555,14 @@
   .float-btn svg { width: 24px; height: 24px; fill: white; }
 
   .float-tooltip {
-    position: absolute; left: 66px;
+    position: absolute; right: 66px;
     background: var(--primary); color: white; padding: 6px 12px; border-radius: 8px;
     font-size: 0.8rem; font-weight: 600; white-space: nowrap;
     opacity: 0; pointer-events: none; transition: opacity 0.2s;
   }
 
-  html[lang="ar"] .float-btns { left: auto; right: 28px; }
-  html[lang="ar"] .float-tooltip { left: auto; right: 66px; }
+  html[lang="ar"] .float-btns { right: auto; left: 28px; }
+  html[lang="ar"] .float-tooltip { right: auto; left: 66px; }
 
   .float-btn:hover .float-tooltip { opacity: 1; }
 
@@ -623,7 +623,9 @@
 <!-- NAV -->
 <nav id="navbar">
   <div class="nav-logo">
-    <div class="nav-logo-text">TYPE<span>X</span>PERT<span style="font-size:0.5em;font-weight:400;color:var(--text-light);margin-left:6px;" data-en="Typing Services" data-ar="خدمات الطباعة">Typing Services</span></div>
+    <div class="nav-logo-text" id="logoText">
+      <span id="logoMain">TYPE<span style="color:var(--accent)">X</span>PERT</span><span id="logoSub" style="font-size:0.5em;font-weight:400;color:var(--text-light);margin-right:6px;">خدمات الطباعة</span>
+    </div>
   </div>
   <ul class="nav-links">
     <li><a href="#about" data-en="About" data-ar="من نحن">About</a></li>
@@ -633,7 +635,7 @@
     <li><a href="#location" data-en="Contact" data-ar="تواصل معنا">Contact</a></li>
   </ul>
   <div class="nav-right">
-    <button class="lang-btn" id="langToggle" onclick="toggleLang()">عربي</button>
+    <button class="lang-btn" id="langToggle" onclick="toggleLang()">English</button>
     <a href="https://wa.me/971508386831" class="nav-cta" data-en="Get Started" data-ar="ابدأ الآن">Get Started</a>
     <button class="hamburger" onclick="toggleMenu()" id="hamburger">
       <span></span><span></span><span></span>
@@ -655,8 +657,8 @@
 <div class="motto-strip" style="margin-top:72px;">
   <p data-en="🚀 Speed, Accuracy, and Efficiency" data-ar="🚀 السرعة، الدقة، والكفاءة">🚀 Speed, Accuracy, and Efficiency</p>
   <span class="motto-sep">•</span>
-  <p data-en="We Can Complete Transactions Online" data-ar="يمكننا إنجاز المعاملات أونلاين">We Can Complete Transactions Online</p>
-  <span class="motto-sep">•</span>
+  <!-- <p data-en="We Can Complete Transactions Online" data-ar="يمكننا إنجاز المعاملات أونلاين">We Can Complete Transactions Online</p>
+  <span class="motto-sep">•</span> -->
   <p data-en="📍 Abu Dhabi & Dubai" data-ar="📍 أبوظبي ودبي">📍 Abu Dhabi & Dubai</p>
 </div>
 
@@ -919,17 +921,29 @@
         <p class="section-sub" style="margin-bottom:36px;" data-en="Visit us at Al Khazna Tower in Abu Dhabi, or reach us online anytime." data-ar="زورنا في برج الخزنة بأبوظبي، أو تواصل معنا أونلاين في أي وقت.">Visit us at Al Khazna Tower in Abu Dhabi, or reach us online anytime.</p>
         <div class="location-info">
           <div class="location-card"><div class="location-card-icon">📍</div><div><h4 data-en="Address" data-ar="العنوان">Address</h4><p>Al Khazna Tower, 15th Floor, Office #1525<br>Al Najda Street, Abu Dhabi, UAE</p></div></div>
-          <div class="location-card"><div class="location-card-icon">📞</div><div><h4 data-en="Phone / WhatsApp" data-ar="الهاتف / واتساب">Phone / WhatsApp</h4><a href="tel:+971508386831">+971 50 838 6831</a><br><a href="tel:+971504467791" style="color:var(--text-sub)">+971 50 446 7791</a></div></div>
-          <div class="location-card"><div class="location-card-icon">✉️</div><div><h4 data-en="Email" data-ar="البريد الإلكتروني">Email</h4><a href="mailto:typexpert.services@gmail.com">typexpert.services@gmail.com</a></div></div>
+          <div class="location-card">
+            <div class="location-card-icon">📞</div>
+            <div>
+              <h4 data-en="Phone / WhatsApp" data-ar="الهاتف / واتساب">Phone / WhatsApp</h4><a href="tel:+971508386831">+971 50 838 6831</a><br><a href="tel:+971504467791" style="color:var(--text-sub)">+971 50 446 7791</a></div></div>
+          <!-- <div class="location-card"><div class="location-card-icon">✉️</div><div><h4 data-en="Email" data-ar="البريد الإلكتروني">Email</h4><a href="mailto:typexpert.services@gmail.com">typexpert.services@gmail.com</a></div></div> -->
           <div class="location-card"><div class="location-card-icon">🕐</div><div><h4 data-en="Working Hours" data-ar="ساعات العمل">Working Hours</h4><p data-en="Mon – Sat: 8:00 AM – 8:00 PM" data-ar="الاثنين – السبت: 8 صباحاً – 8 مساءً">Mon – Sat: 8:00 AM – 8:00 PM</p></div></div>
         </div>
       </div>
       <div class="fade-up">
-        <div class="map-placeholder">
-          <span>🗺️</span>
-          <p data-en="Al Khazna Tower · Abu Dhabi" data-ar="برج الخزنة · أبوظبي">Al Khazna Tower · Abu Dhabi</p>
-          <a href="https://maps.google.com/?q=Al+Khazna+Tower+Abu+Dhabi" target="_blank" class="btn-primary" style="font-size:0.85rem;padding:10px 20px;" data-en="📍 Open in Maps" data-ar="📍 افتح في الخرائط">📍 Open in Maps</a>
+        <div style="border-radius:20px;overflow:hidden;box-shadow:var(--shadow-md);border:1px solid var(--mid-gray);height:380px;">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3631.5!2d54.3666!3d24.4871!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5e665f6b8a1f1f%3A0x1f1f1f1f1f1f1f1f!2sAl%20Khazna%20Tower%2C%20Al%20Najda%20St%2C%20Abu%20Dhabi!5e0!3m2!1sen!2sae!4v1700000000000!5m2!1sen!2sae"
+            width="100%" height="100%" style="border:0;display:block;"
+            allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="TypeXpert Location – Al Khazna Tower, Abu Dhabi">
+          </iframe>
         </div>
+        <a href="https://maps.google.com/?q=Al+Khazna+Tower,+Al+Najda+Street,+Abu+Dhabi" target="_blank"
+           style="display:inline-flex;align-items:center;gap:8px;margin-top:14px;color:var(--accent);font-size:0.88rem;font-weight:600;text-decoration:none;">
+          <span>📍</span>
+          <span data-en="Open in Google Maps →" data-ar="فتح في خرائط جوجل ←">فتح في خرائط جوجل ←</span>
+        </a>
       </div>
     </div>
   </div>
@@ -981,8 +995,8 @@
       <h4 data-en="Contact" data-ar="تواصل">Contact</h4>
       <ul>
         <li><a href="tel:+971508386831">+971 50 838 6831</a></li>
-        <li><a href="tel:+971504467791">+971 50 446 7791</a></li>
-        <li><a href="mailto:typexpert.services@gmail.com">typexpert.services@gmail.com</a></li>
+        <!-- <li><a href="tel:+971504467791">+971 50 446 7791</a></li> -->
+        <!-- <li><a href="mailto:typexpert.services@gmail.com">typexpert.services@gmail.com</a></li> -->
         <li><a href="#location" data-en="Abu Dhabi Office" data-ar="مكتب أبوظبي">Abu Dhabi Office</a></li>
       </ul>
     </div>
@@ -1007,7 +1021,20 @@
 
 <script>
   // ── LANGUAGE TOGGLE ──
-  let currentLang = 'en';
+  let currentLang = 'ar';
+
+  // Apply Arabic on load
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('[data-ar]').forEach(el => {
+      const val = el.getAttribute('data-ar');
+      if (!val) return;
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.placeholder = val;
+      } else {
+        el.innerHTML = val;
+      }
+    });
+  });
 
   function toggleLang() {
     currentLang = currentLang === 'en' ? 'ar' : 'en';
@@ -1017,6 +1044,21 @@
 
     const btn = document.getElementById('langToggle');
     btn.textContent = currentLang === 'en' ? 'عربي' : 'English';
+
+    // Update logo
+    const logoMain = document.getElementById('logoMain');
+    const logoSub = document.getElementById('logoSub');
+    if (currentLang === 'ar') {
+      // logoMain.innerHTML = 'تايب<span style="color:var(--accent)">إكس</span>بيرت';
+      logoSub.textContent = 'خدمات الطباعة';
+      logoSub.style.marginRight = '6px';
+      logoSub.style.marginLeft = '0';
+    } else {
+      logoMain.innerHTML = 'TYPE<span style="color:var(--accent)">X</span>PERT';
+      logoSub.textContent = 'Typing Services';
+      logoSub.style.marginLeft = '6px';
+      logoSub.style.marginRight = '0';
+    }
 
     // Update all data-en/data-ar elements
     document.querySelectorAll('[data-en]').forEach(el => {
